@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% for post in posts %}
+
+<div class="post" id="post_{{post.pk}}">
+    <div class="shadow w-25 p-3 mb-5 bg-white rounded">
+        <button type="button" class="btn btn-light btn-block btn-sm" id="button_{{post.pk}}">Hide</button>
+        <div class="card border-dark mb-3" id="card_{{post.pk}}" style="max-width: 40rem;">
+            <img src={{post.ad_image}}  class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title"><a class="text-dark" href={{post.ad_id_link}} target="_blank">{{post.ad_title}}</a></h5>
+                <h6 class="card-subtitle mb-2 text-muted" id="category_{{post.pk}}">{{post.ad_category}}</h6>
+                <p class="card-text">{{post.ad_price}}</p>
+                <p class="card-text font-italic"><small>{{post.ad_id}}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  document.getElementById('button_{{post.pk}}').onclick = function() {
+  current_state = document.getElementById('card_{{post.pk}}').hidden
+  document.getElementById('card_{{post.pk}}').hidden = !current_state;
+
+  if (current_state = document.getElementById('card_{{post.pk}}').hidden) {
+  document.getElementById('button_{{post.pk}}').innerHTML='Show'
+  }
+  else {document.getElementById('button_{{post.pk}}').innerHTML='Hide'}
+    }
+</script>
+{% endfor %}
+{% endblock %}
